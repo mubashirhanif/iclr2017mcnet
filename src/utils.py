@@ -99,7 +99,7 @@ def load_kth_data(f_name, data_path, image_size, K, T):
     if low >= high: print(vid_path)
     stidx = np.random.randint(low=low, high=high)
   seq = np.zeros((image_size, image_size, K+T, 1), dtype="float32")
-  for t in xrange(K+T):
+  for t in range(K+T):
     img = cv2.cvtColor(cv2.resize(vid.get_data(stidx+t),
                        (image_size,image_size)),
                        cv2.COLOR_RGB2GRAY)
@@ -109,7 +109,7 @@ def load_kth_data(f_name, data_path, image_size, K, T):
     seq = seq[:,::-1]
 
   diff = np.zeros((image_size, image_size, K-1, 1), dtype="float32")
-  for t in xrange(1,K):
+  for t in range(1,K):
     prev = inverse_transform(seq[:,:,t-1])
     next = inverse_transform(seq[:,:,t])
     diff[:,:,t-1] = next.astype("float32")-prev.astype("float32")
@@ -133,7 +133,7 @@ def load_s1m_data(f_name, data_path, trainlist, K, T):
         stidx = np.random.randint(low=low, high=high)
       seq = np.zeros((img_size[0], img_size[1], K+T, 3),
                      dtype="float32")
-      for t in xrange(K+T):
+      for t in range(K+T):
         img = cv2.resize(vid.get_data(stidx+t),
                          (img_size[1],img_size[0]))[:,:,::-1]
         seq[:,:,t] = transform(img)
@@ -143,7 +143,7 @@ def load_s1m_data(f_name, data_path, trainlist, K, T):
 
       diff = np.zeros((img_size[0], img_size[1], K-1, 1),
                       dtype="float32")
-      for t in xrange(1,K):
+      for t in range(1,K):
         prev = inverse_transform(seq[:,:,t-1])*255
         prev = cv2.cvtColor(prev.astype("uint8"),cv2.COLOR_BGR2GRAY)
         next = inverse_transform(seq[:,:,t])*255

@@ -99,7 +99,7 @@ def main(lr, batch_size, alpha, beta, image_size, K,
                                                                             paths,
                                                                             shapes,
                                                                             Ks, Ts))
-            for i in xrange(batch_size):
+            for i in range(batch_size):
               seq_batch[i] = output[i][0]
               diff_batch[i] = output[i][1]
 
